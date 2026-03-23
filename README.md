@@ -45,8 +45,9 @@ Create a local `.env.local` and set:
 
 ```bash
 RESEND_API_KEY=your_resend_api_key
-LEAD_NOTIFICATION_TO=hello@yourdomain.com
-LEAD_NOTIFICATION_FROM=OpendoorsTech <noreply@yourdomain.com>
+LEAD_NOTIFICATION_TO=sales@opendoorstech.co.za
+LEAD_NOTIFICATION_FROM=OpendoorsTech <noreply@send.opendoorstech.co.za>
+BOOKING_EMBED_URL=https://calendly.com/andilendesi-nvxv/30min
 ```
 
 Add the same variables in the Vercel project settings before production deployment.
@@ -60,10 +61,11 @@ Add the same variables in the Vercel project settings before production deployme
 
 ## Where to add booking calendar link
 
-Update `app/book/page.tsx`:
+Set `BOOKING_EMBED_URL` in your local `.env` and in your production environment:
 
-- Replace the placeholder block with your Calendly/Cal.com iframe.
-- Or link the primary booking button to your external scheduling URL.
+- Example: `BOOKING_EMBED_URL=https://calendly.com/your-team/consultation`
+- The `/book` page will render that URL in a live iframe embed automatically.
+- If the variable is missing, the page falls back to the in-app demo calendar UI.
 
 ## Where to add analytics (GA / Pixel)
 

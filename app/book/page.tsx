@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { BookingCalendar } from "@/components/BookingCalendar";
 
 export const metadata: Metadata = {
   title: "Book a Consultation",
@@ -8,28 +9,52 @@ export const metadata: Metadata = {
 };
 
 export default function BookPage() {
+  const bookingEmbedUrl =
+    process.env.BOOKING_EMBED_URL ?? process.env.NEXT_PUBLIC_BOOKING_EMBED_URL ?? "";
+  const hasLiveBooking = bookingEmbedUrl.trim().length > 0;
+
   return (
     <section className="section-space">
       <div className="container-max max-w-4xl">
         <h1 className="text-4xl font-bold tracking-tight text-ink sm:text-5xl">Book a Consultation</h1>
         <p className="mt-4 text-lg text-muted">
-          Use your calendar tool of choice to embed booking below. Replace this placeholder with your
-          live scheduling URL.
+          {hasLiveBooking
+            ? "Choose a time directly in our live scheduling calendar."
+            : "Choose an available consultation slot below while the live scheduling embed is being configured."}
         </p>
 
-        <div className="mt-8 rounded-2xl border border-dashed border-slate-300 bg-panel p-8 text-center">
-          <p className="text-sm font-medium text-ink">Calendar Embed Placeholder</p>
-          <p className="mt-2 text-sm text-muted">
-            Replace this block with a Calendly/Cal.com iframe and set your meeting rules.
-          </p>
+        <div className="mt-8">
+          {hasLiveBooking ? (
+            <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-card">
+              <iframe
+                src={bookingEmbedUrl}
+                title="Book a consultation"
+                className="min-h-[900px] w-full"
+                loading="lazy"
+                referrerPolicy="strict-origin-when-cross-origin"
+              />
+            </div>
+          ) : (
+            <BookingCalendar />
+          )}
         </div>
 
         <div className="mt-8 flex flex-wrap gap-3">
           <Link href="/contact?intent=audit" className="btn-secondary">
             Request an Audit
           </Link>
-          <Link href="/services" className="btn-primary">
-            Review Service Packages
+          {hasLiveBooking ? (
+            <a
+              href={bookingEmbedUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="btn-primary"
+            >
+              Open Booking in New Tab
+            </a>
+          ) : null}
+          <Link href="/" className="btn-secondary">
+            Back to Home
           </Link>
         </div>
       </div>
