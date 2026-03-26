@@ -24,8 +24,8 @@ export default function ContactPage() {
             <Link href="/book" className="btn-primary">
               Book a Consultation
             </Link>
-            <Link href="/capability-statement.pdf" className="btn-secondary">
-              Download Capability Statement
+            <Link href="/capability-statement" className="btn-secondary">
+              View Capability Statement
             </Link>
           </div>
         </div>

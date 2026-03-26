@@ -76,8 +76,8 @@ export default function HomePage() {
               <Link href="/contact?intent=audit" className="btn-secondary">
                 Request an Audit
               </Link>
-              <Link href="/capability-statement.pdf" className="btn-secondary">
-                Download Capability Statement
+              <Link href="/capability-statement" className="btn-secondary">
+                View Capability Statement
               </Link>
             </div>
             <ul className="mt-7 grid gap-2 text-sm text-slate-700 sm:grid-cols-3">
